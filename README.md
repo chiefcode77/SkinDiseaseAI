@@ -1,0 +1,3 @@
+﻿# SkinDiseaseAI
+
+One-line project description...
