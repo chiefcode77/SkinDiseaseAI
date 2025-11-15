@@ -1,0 +1,48 @@
+name: Backend Tests
+
+on:
+  push:
+    branches:
+      - develop
+      - feat/**
+      - fix/**
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          # pip cache directory
+          path: |
+            ~/.cache/pip
+          # change this key if you change Python version or add more files
+          key: >-
+            pip-3.11-${{ runner.os }}-${{ hashFiles('backend/requirements.txt') }}
+          restore-keys: |
+            pip-3.11-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: |
+          cd backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest Pillow
+
+      - name: Run tests
+        run: |
+          cd backend
+          pytest -q
