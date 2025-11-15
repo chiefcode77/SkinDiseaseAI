@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="assets/logo.png" width="220">
+</p>
+
+# 🩺 SkinDiseaseAI  
+
 # 🩺 SkinDiseaseAI  
 AI-powered skin disease detection with FastAPI & TensorFlow
 
