@@ -23,6 +23,18 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          # pip cache directory
+          path: |
+            ~/.cache/pip
+          # change this key if you change Python version or add more files
+          key: >-
+            pip-3.11-${{ runner.os }}-${{ hashFiles('backend/requirements.txt') }}
+          restore-keys: |
+            pip-3.11-${{ runner.os }}-
+
       - name: Install dependencies
         run: |
           cd backend
